@@ -12,7 +12,7 @@ type AlfredResponse struct {
 }
 
 type AlfredResponseItem struct {
-	Valid bool `xml:"valid,attr,omitempty"`
+	Valid bool `xml:"valid,attr"`
 	Arg string `xml:"arg,attr,omitempty"`
 	Uid string `xml:"uid,attr,omitempty"`
 	Title string `xml:"title"`
