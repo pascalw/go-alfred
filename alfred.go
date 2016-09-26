@@ -1,24 +1,24 @@
 package alfred
 
 import (
-	"strings"
-	"fmt"
-	"encoding/xml"
 	"encoding/json"
+	"encoding/xml"
+	"fmt"
+	"strings"
 )
 
 type AlfredResponse struct {
-	Items []AlfredResponseItem `json:"items"`
-	XMLName struct{} `json:"-" xml:"items"`
+	Items   []AlfredResponseItem `json:"items"`
+	XMLName struct{}             `json:"-" xml:"items"`
 }
 
 type AlfredResponseItem struct {
-	Valid bool `json:"valid" xml:"valid,attr"`
-	Arg string `json:"arg,omitempty" xml:"arg,attr,omitempty"`
-	Uid string `json:"uid,omitempty" xml:"uid,attr,omitempty"`
-	Title string `json:"title" xml:"title"`
+	Valid    bool   `json:"valid" xml:"valid,attr"`
+	Arg      string `json:"arg,omitempty" xml:"arg,attr,omitempty"`
+	Uid      string `json:"uid,omitempty" xml:"uid,attr,omitempty"`
+	Title    string `json:"title" xml:"title"`
 	Subtitle string `json:"subtitle" xml:"subtitle"`
-	Icon string `json:"icon" xml:"icon"`
+	Icon     string `json:"icon" xml:"icon"`
 
 	XMLName struct{} `json:"-" xml:"item"`
 }
@@ -63,7 +63,9 @@ func MatchesTerms(queryTerms []string, itemName string) bool {
 	nameLower := strings.ToLower(itemName)
 
 	for _, term := range queryTerms {
-		if ! strings.Contains(nameLower, term) { return false }
+		if !strings.Contains(nameLower, term) {
+			return false
+		}
 	}
 
 	return true
