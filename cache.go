@@ -1,22 +1,26 @@
 package alfred
 
 import (
-	"os"
 	"encoding/json"
+	"os"
 	"time"
 )
 
 func WriteCache(obj interface{}) {
 	cacheFile, err := os.Create("cache")
-	if err != nil { panic(err) }
+	if err != nil {
+		panic(err)
+	}
 
 	defer cacheFile.Close()
 	json.NewEncoder(cacheFile).Encode(obj)
 }
 
-func ReadCache(into interface {}, expireAfter time.Duration) ( err error) {
+func ReadCache(into interface{}, expireAfter time.Duration) (err error) {
 	cacheFile, err := os.Open("cache")
-	if err != nil { return err }
+	if err != nil {
+		return err
+	}
 
 	defer cacheFile.Close()
 
