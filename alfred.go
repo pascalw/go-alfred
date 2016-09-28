@@ -8,19 +8,24 @@ import (
 )
 
 type AlfredResponse struct {
+	XMLName xml.Name             `json:"-" xml:"items"`
 	Items   []AlfredResponseItem `json:"items"`
-	XMLName struct{}             `json:"-" xml:"items"`
 }
 
 type AlfredResponseItem struct {
-	Valid    bool   `json:"valid" xml:"valid,attr"`
-	Arg      string `json:"arg,omitempty" xml:"arg,attr,omitempty"`
-	Uid      string `json:"uid,omitempty" xml:"uid,attr,omitempty"`
-	Title    string `json:"title" xml:"title"`
-	Subtitle string `json:"subtitle" xml:"subtitle"`
-	Icon     string `json:"icon" xml:"icon"`
+	XMLName  xml.Name `json:"-" xml:"item"`
+	Valid    bool     `json:"valid" xml:"valid,attr"`
+	Arg      string   `json:"arg,omitempty" xml:"arg,attr,omitempty"`
+	Uid      string   `json:"uid,omitempty" xml:"uid,attr,omitempty"`
+	Title    string   `json:"title" xml:"title"`
+	Subtitle string   `json:"subtitle" xml:"subtitle"`
+	Icon     Icon     `json:"icon"`
+}
 
-	XMLName struct{} `json:"-" xml:"item"`
+type Icon struct {
+	XMLName xml.Name `json:"-" xml:"icon"`
+	Type    string   `json:"type,omitempty" xml:"type,attr,omitempty"`
+	Path    string   `json:"path" xml:",chardata"`
 }
 
 const xmlHeader = `<?xml version="1.0" encoding="UTF-8"?>` + "\n"
